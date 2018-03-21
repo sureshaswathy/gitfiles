@@ -1,0 +1,160 @@
+Explicit Intent
+---------------
+
+Main_Activity1.java
+...................
+
+public class MainActivity1 extends Activity {
+	 EditText t1,t2;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main_activity1);
+		t1=(EditText)findViewById(R.id.editText1);
+		t2=(EditText)findViewById(R.id.editText2);
+	}
+
+	public void msg(View v)
+	{
+		
+		String a=t1.getText().toString();
+		String b=t2.getText().toString();
+		if( a.equals("install") && b.equals("oreoand"))
+		{
+			Intent n=new Intent(getApplicationContext(),MainActivity2.class);	
+			n.putExtra("Value1","install");
+			startActivity(n);
+
+		}
+		else
+		{
+			Toast.makeText(getApplicationContext(),"Invalid username or password",Toast.LENGTH_LONG).show();
+		}
+	
+	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main_activity1, menu);
+		return true;
+	}
+
+}
+
+Activity_main_activity1
+.......................
+
+
+<TableLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tableLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Username"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+             <EditText
+                 android:id="@+id/editText1"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginLeft="42dp"
+                 android:ems="10" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="22dp"
+                android:text="Password"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+             <EditText
+                 android:id="@+id/editText2"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:ems="10" >
+
+                 <requestFocus />
+             </EditText>
+            
+        </TableRow>
+        
+         <Button
+             android:id="@+id/button1"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_below="@+id/tableLayout1"
+             android:layout_marginLeft="38dp"
+             android:layout_marginTop="92dp"
+             android:layout_toRightOf="@+id/tableLayout1"
+             android:text="Login" 
+             android:onClick="msg"/>
+       
+    </TableLayout>
+
+   
+   
+   
+
+Main_Activity2.java
+....................
+
+public class MainActivity2 extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main_activity2);
+		Bundle extras=getIntent().getExtras();
+		String Value1=extras.getString("Value1");
+		Toast.makeText(getApplicationContext(),"Welcome "+Value1,Toast.LENGTH_LONG).show();
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main_activity2, menu);
+		return true;
+	}
+
+}
+
+Activity_main_activity2
+........................
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity2" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hello_world" />
+
+</RelativeLayout>
+
+
